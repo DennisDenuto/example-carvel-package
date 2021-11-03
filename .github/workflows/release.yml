@@ -40,7 +40,7 @@ jobs:
           apiVersion: packaging.carvel.dev/v1alpha1
           kind: PackageRepository
           metadata:
-            name: cert-manager-repo
+            name: test-carvel-package-repo
           spec:
             fetch:
               imgpkgBundle:
