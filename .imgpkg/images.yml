@@ -1,0 +1,11 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: ghcr.io/dennisdenuto/test-carvel-complex-bundle:v0.0.1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.0.1
+          url: ghcr.io/dennisdenuto/test-carvel-complex-bundle:v0.0.1
+  image: ghcr.io/dennisdenuto/test-carvel-complex-bundle@sha256:6d510fbb5970bb249840776d2218dda7986a4a89d8e4a9d1223fea465c616d63
+kind: ImagesLock
