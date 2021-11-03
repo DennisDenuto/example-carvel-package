@@ -47,11 +47,26 @@ jobs:
                 image: ghcr.io/dennisdenuto/test-carvel-package-repo:${tag_name}
           EOF
 
+          cat <<EOF | kbld -f - > pkgi.yaml
+          ---
+          apiVersion: packaging.carvel.dev/v1alpha1
+          kind: PackageInstall
+          metadata:
+            name: pkg-install-carvel-helloworld
+          spec:
+            serviceAccountName: default-ns-sa
+            packageRef:
+              refName: example.bundle.com
+              versionSelection:
+                constraints: ">0.0.1"
+
+          # TODO: sign both these yaml asset
+
       - name: Create Release
         run: |
           set -x
           assets=()
-          for asset in ./pkgr.yaml; do
+          for asset in ./pkgi.yaml ./pkgr.yaml; do
             assets+=("-a" "$asset")
           done
           tag_name="${GITHUB_REF##*/}"
