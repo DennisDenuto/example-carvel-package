@@ -1,0 +1,13 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: example-bundle
+spec:
+  displayName: "example-bundle"
+  longDescription: "A long description"
+  shortDescription: "A short description"
+  providerName: packages-r-us
+  maintainers:
+    - name: Denuto
+  categories:
+    - example-apps

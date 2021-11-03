@@ -1,0 +1,28 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: example-bundle.0.0.1
+spec:
+  refName: example-bundle
+  version: 0.0.1
+  releaseNotes: "relevant release notes for this version..."
+  licenses:
+    - "Apache 2.0"
+  template:
+    spec:
+      fetch:
+        - imgpkgBundle:
+            image: ghcr.io/dennisdenuto/test-carvel-complex-bundle:v0.0.1
+      template:
+        - ytt:
+            paths:
+              - config/
+        - kbld:
+            paths:
+              - "-"
+              - .imgpkg/images.yml
+      deploy:
+        - kapp: {}
+  valuesSchema:
+    openAPIv3:
+      title: example-bundle.0.0.1 values schema
