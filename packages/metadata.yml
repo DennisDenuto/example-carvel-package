@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: example-bundle
+  name: example.bundle.com
 spec:
   displayName: "example-bundle"
   longDescription: "A long description"
