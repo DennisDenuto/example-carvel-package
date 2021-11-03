@@ -59,14 +59,17 @@ jobs:
               refName: example.bundle.com
               versionSelection:
                 constraints: ">0.0.1"
+          EOF
 
-          # TODO: sign both these yaml asset
+          export COSIGN_EXPERIMENTAL=1
+          cosign sign-blob --output pkgr.sig pkgr.yaml 2>&1 | sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' > pkgr.crt
+          cosign sign-blob --output pkgi.sig pkgi.yaml 2>&1 | sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' > pkgi.crt
 
       - name: Create Release
         run: |
           set -x
           assets=()
-          for asset in ./pkgi.yaml ./pkgr.yaml; do
+          for asset in ./pkgi.{yaml,sig,crt} ./pkgr.{yaml,sig,crt}; do
             assets+=("-a" "$asset")
           done
           tag_name="${GITHUB_REF##*/}"
